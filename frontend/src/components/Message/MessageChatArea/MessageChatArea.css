@@ -1,0 +1,14 @@
+.message_chat_area {
+  width: 100%;
+}
+.message_chat_area_card {
+  height: 70vh;
+  border: none;
+}
+.message_chat_area_card_header {
+  display: flex;
+  height: 40px;
+}
+.message_chat_area_card_body {
+  overflow-y: scroll;
+}

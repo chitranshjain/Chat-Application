@@ -1,0 +1,25 @@
+.message_panel {
+  margin: 10px;
+}
+
+.messagepanel_footer {
+  background-color: rgb(0 0 0 / 3%);
+  border-radius: 10px;
+  border: 1px solid rgb(0 0 0 / 18%);
+  padding: 10px;
+  display: flex;
+}
+
+.footer_icons {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.footer_icons .submit_message {
+  display: inline-block;
+}
+
+.submit_message {
+  text-align: right;
+}

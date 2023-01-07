@@ -1,0 +1,13 @@
+
+body{
+    --slack-color: #3f0f40;
+    --sidebarwidth: 400px;
+    --headerheight: 60px;
+}
+.app_body{
+    display: flex;
+}
+
+.App{
+    background-color: white;
+}

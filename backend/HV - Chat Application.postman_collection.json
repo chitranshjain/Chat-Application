@@ -1,0 +1,840 @@
+{
+	"info": {
+		"_postman_id": "57f3bce8-74a7-4352-b1c4-aeb570147999",
+		"name": "HV - Chat Application",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Sign Up",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Chitransh Jain",
+									"type": "default"
+								},
+								{
+									"key": "email",
+									"value": "test2@gmail.com",
+									"type": "default"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "default"
+								},
+								{
+									"key": "confirmPassword",
+									"value": "password",
+									"type": "default"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/Users/Chitranshjain/Downloads/MyImage-min-2.jpeg"
+								},
+								{
+									"key": "phoneNumber",
+									"value": "8171907780",
+									"type": "default"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sign In",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"test@gmail.com\",\n    \"password\": \"password@12\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Get Logged In User's Profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYTgwZTgwNTU1OTBkMzUyMmU5NTYyNiIsImlhdCI6MTY3MjAzNzM4OCwiZXhwIjoxNjc0NjI5Mzg4fQ.njY-RfPWko2mUIr5WJTeKKY-bZAMDRNo52GvQwVnroE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/user/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"user",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Other Users' Profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYTgwZTgwNTU1OTBkMzUyMmU5NTYyNiIsImlhdCI6MTY3MjAzNzM4OCwiZXhwIjoxNjc0NjI5Mzg4fQ.njY-RfPWko2mUIr5WJTeKKY-bZAMDRNo52GvQwVnroE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/user/all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"user",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User's Profile By ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYTgwZTgwNTU1OTBkMzUyMmU5NTYyNiIsImlhdCI6MTY3MjAzNzM4OCwiZXhwIjoxNjc0NjI5Mzg4fQ.njY-RfPWko2mUIr5WJTeKKY-bZAMDRNo52GvQwVnroE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/user/63a80e8055590d3522e95626",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"user",
+								"63a80e8055590d3522e95626"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User's Profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYTgwZTgwNTU1OTBkMzUyMmU5NTYyNiIsImlhdCI6MTY3MjAzNzM4OCwiZXhwIjoxNjc0NjI5Mzg4fQ.njY-RfPWko2mUIr5WJTeKKY-bZAMDRNo52GvQwVnroE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Chitransh Jain",
+									"type": "default"
+								},
+								{
+									"key": "phoneNumber",
+									"value": "8171907780",
+									"type": "default"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/Users/Chitranshjain/Downloads/180567@C5806T01.jpg"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/user/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"user",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User's Password",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYTgwZTgwNTU1OTBkMzUyMmU5NTYyNiIsImlhdCI6MTY3MjAzNzM4OCwiZXhwIjoxNjc0NjI5Mzg4fQ.njY-RfPWko2mUIr5WJTeKKY-bZAMDRNo52GvQwVnroE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"oldPassword\": \"password\",\n    \"newPassword\": \"password@12\",\n    \"confirmNewPassword\": \"password@12\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/user/password",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"user",
+								"password"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Chat",
+			"item": [
+				{
+					"name": "Get Logged In User's Chats",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYTgwZTgwNTU1OTBkMzUyMmU5NTYyNiIsImlhdCI6MTY3MjAzNzM4OCwiZXhwIjoxNjc0NjI5Mzg4fQ.njY-RfPWko2mUIr5WJTeKKY-bZAMDRNo52GvQwVnroE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/chat/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"chat",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create A New Chat",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYTgwZTgwNTU1OTBkMzUyMmU5NTYyNiIsImlhdCI6MTY3MjAzNzM4OCwiZXhwIjoxNjc0NjI5Mzg4fQ.njY-RfPWko2mUIr5WJTeKKY-bZAMDRNo52GvQwVnroE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"isGroupChat\" : true,\n    \"users\": [\"63a9462525a7e36750f45af2\", \"63a9463925a7e36750f45af5\"],\n    \"chatName\": \"Hustlers\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/chat/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"chat",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Rename Group Chat",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYTgwZTgwNTU1OTBkMzUyMmU5NTYyNiIsImlhdCI6MTY3MjAzNzM4OCwiZXhwIjoxNjc0NjI5Mzg4fQ.njY-RfPWko2mUIr5WJTeKKY-bZAMDRNo52GvQwVnroE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"chatName\": \"JSR Hustlers\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/chat/rename/63a9478156a9f57b49304385",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"chat",
+								"rename",
+								"63a9478156a9f57b49304385"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Member To Group Chat",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYTgwZTgwNTU1OTBkMzUyMmU5NTYyNiIsImlhdCI6MTY3MjAzNzM4OCwiZXhwIjoxNjc0NjI5Mzg4fQ.njY-RfPWko2mUIr5WJTeKKY-bZAMDRNo52GvQwVnroE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user\": \"63a80e8c55590d3522e9562a\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/chat/add/63a9478156a9f57b49304385",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"chat",
+								"add",
+								"63a9478156a9f57b49304385"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove Member From Group Chat",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYTgwZTgwNTU1OTBkMzUyMmU5NTYyNiIsImlhdCI6MTY3MjAzNzM4OCwiZXhwIjoxNjc0NjI5Mzg4fQ.njY-RfPWko2mUIr5WJTeKKY-bZAMDRNo52GvQwVnroE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user\": \"63a80e8c55590d3522e9562a\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/chat/remove/63a9478156a9f57b49304385",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"chat",
+								"remove",
+								"63a9478156a9f57b49304385"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Chat Details By Chat ID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYTgwZTgwNTU1OTBkMzUyMmU5NTYyNiIsImlhdCI6MTY3MjAzNzM4OCwiZXhwIjoxNjc0NjI5Mzg4fQ.njY-RfPWko2mUIr5WJTeKKY-bZAMDRNo52GvQwVnroE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user\": \"63a80e8c55590d3522e9562a\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/chat/63a9478156a9f57b49304385",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"chat",
+								"63a9478156a9f57b49304385"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pin A Chat",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYTgwZTgwNTU1OTBkMzUyMmU5NTYyNiIsImlhdCI6MTY3MjAzNzM4OCwiZXhwIjoxNjc0NjI5Mzg4fQ.njY-RfPWko2mUIr5WJTeKKY-bZAMDRNo52GvQwVnroE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user\": \"63a80e8c55590d3522e9562a\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/chat/pin/63a9498e8bb585153ec2a50c",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"chat",
+								"pin",
+								"63a9498e8bb585153ec2a50c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Unpin A Chat",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYTgwZTgwNTU1OTBkMzUyMmU5NTYyNiIsImlhdCI6MTY3MjAzNzM4OCwiZXhwIjoxNjc0NjI5Mzg4fQ.njY-RfPWko2mUIr5WJTeKKY-bZAMDRNo52GvQwVnroE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user\": \"63a80e8c55590d3522e9562a\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/chat/unpin/63a9478156a9f57b49304385",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"chat",
+								"unpin",
+								"63a9478156a9f57b49304385"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete A Chat",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYTgwZTgwNTU1OTBkMzUyMmU5NTYyNiIsImlhdCI6MTY3MjAzNzM4OCwiZXhwIjoxNjc0NjI5Mzg4fQ.njY-RfPWko2mUIr5WJTeKKY-bZAMDRNo52GvQwVnroE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user\": \"63a80e8c55590d3522e9562a\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/chat/63a94a6a8bb585153ec2a528",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"chat",
+								"63a94a6a8bb585153ec2a528"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Message Transactions",
+			"item": [
+				{
+					"name": "Create A New Message Transaction",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYTgwZTgwNTU1OTBkMzUyMmU5NTYyNiIsImlhdCI6MTY3MjAzNzM4OCwiZXhwIjoxNjc0NjI5Mzg4fQ.njY-RfPWko2mUIr5WJTeKKY-bZAMDRNo52GvQwVnroE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"message\": \"Hello friends, how's it going?\",\n    \"chatId\": \"63a9478156a9f57b49304385\",\n    \"transactionType\": \"NEW\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/message/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"message",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Check If Pending Transactions Exists",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYTgwZTgwNTU1OTBkMzUyMmU5NTYyNiIsImlhdCI6MTY3MjAzNzM4OCwiZXhwIjoxNjc0NjI5Mzg4fQ.njY-RfPWko2mUIr5WJTeKKY-bZAMDRNo52GvQwVnroE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"message\": \"When are you guys coming back to Noida?\",\n    \"chatId\": \"63a9478156a9f57b49304385\",\n    \"transactionType\": \"EDIT\",\n    \"messageId\": \"63a94bb30098841825a3f256\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/message/transaction/63a9478156a9f57b49304385/63a94bb30098841825a3f256",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"message",
+								"transaction",
+								"63a9478156a9f57b49304385",
+								"63a94bb30098841825a3f256"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fetch Pending Transactions",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYTgwZTgwNTU1OTBkMzUyMmU5NTYyNiIsImlhdCI6MTY3MjAzNzM4OCwiZXhwIjoxNjc0NjI5Mzg4fQ.njY-RfPWko2mUIr5WJTeKKY-bZAMDRNo52GvQwVnroE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"message\": \"When are you guys coming back to Noida?\",\n    \"chatId\": \"63a9478156a9f57b49304385\",\n    \"transactionType\": \"EDIT\",\n    \"messageId\": \"63a94bb30098841825a3f256\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/message/63a9478156a9f57b49304385/63a94bb30098841825a3f256",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"message",
+								"63a9478156a9f57b49304385",
+								"63a94bb30098841825a3f256"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fetch All Messages For A Chat",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYTgwZTgwNTU1OTBkMzUyMmU5NTYyNiIsImlhdCI6MTY3MjAzNzM4OCwiZXhwIjoxNjc0NjI5Mzg4fQ.njY-RfPWko2mUIr5WJTeKKY-bZAMDRNo52GvQwVnroE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"message\": \"When are you guys coming back to Noida?\",\n    \"chatId\": \"63a9478156a9f57b49304385\",\n    \"transactionType\": \"EDIT\",\n    \"messageId\": \"63a94bb30098841825a3f256\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/message/63a9478156a9f57b49304385",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"message",
+								"63a9478156a9f57b49304385"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

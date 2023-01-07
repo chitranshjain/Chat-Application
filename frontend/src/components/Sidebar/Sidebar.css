@@ -1,0 +1,48 @@
+.sidebar {
+  background-color: var(--slack-color);
+  border-top: 1px solid #49274b;
+  color: white;
+  width: var(--sidebarwidth);
+  padding: 16px;
+  height: 100vh;
+}
+
+.profile {
+  display: flex;
+  border-bottom: 1 px solid #49274b;
+  padding-bottom: 10px;
+  padding: 13px;
+  border-bottom: 1px solid #49274b;
+  /* height: 20vh; */
+}
+
+.chat {
+  border-bottom: 1 px solid #49274b;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #49274b;
+  height: 65vh;
+  overflow-y: scroll;
+}
+
+.sidebar-footer {
+  padding: 16px;
+  text-align: right;
+}
+
+.sidebar_header {
+  display: flex;
+}
+
+.sidebar_header .logout {
+  margin-left: 200px;
+}
+
+@media screen and (max-width: 900px) {
+  .sidebar {
+    width: 300px;
+  }
+
+  .sidebar_header .logout {
+    margin-left: 160px;
+  }
+}
