@@ -1,92 +1,1008 @@
 # Chat Application
 
+We are building a chat application that will be a mix of popular chat applications Slack and WhatsApp.
 
+The features we are planning to clone are :
 
-## Getting started
+- Direct Chats
+- Group Chats (Channels)
+- Pin Chats
+- Online / Offline Status
+- Read Receipts
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+The tech stack we'll be using is :
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+- Frontend - React.JS
+- Backend - NodeJS, ExpressJS
+- Database - MongoDB
+- Storage - Firebase
 
-## Add your files
+# API Documentation
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+## Auth
 
+The authentication related endpoints such as user registration, login.
+
+### Sign Up
+
+This end point will be used to create a new account
+
+#### Request
+
+```javascript
+POST /api/auth/register
+  {
+    data: {
+        name: String,
+        phoneNumber: String,
+        image: File,
+        email: String,
+        password: String,
+        confirmPassword: String
+    },
+  };
 ```
-cd existing_repo
-git remote add origin https://gitlab.com/sde-bootcamp/chat-application.git
-git branch -M main
-git push -uf origin main
+
+#### Response
+
+##### Success Response
+
+```javascript
+{
+    status: 201,
+    data: {
+        message: String,
+        token: String
+    }
+}
 ```
 
-## Integrate with your tools
+##### Error Response
 
-- [ ] [Set up project integrations](https://gitlab.com/sde-bootcamp/chat-application/-/settings/integrations)
+```javascript
+{
+    status: 400 || 500,
+    data: {
+        message: String,
+    }
+}
+```
 
-## Collaborate with your team
+| Status Code | Message                                      |
+| ----------- | -------------------------------------------- |
+| 201         | Account Created Successfully                 |
+| 400         | Invalid Input                                |
+| 500         | Something went wrong, please try again later |
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Automatically merge when pipeline succeeds](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+### Sign In
 
-## Test and Deploy
+This end point will be used to sign in to an existing account
 
-Use the built-in continuous integration in GitLab.
+#### Request
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+```javascript
+POST /api/auth/login
+  {
+    data: {
+        email: String,
+        password: String,
+    },
+  };
+```
 
-***
+#### Response
 
-# Editing this README
+##### Success Response
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
+```javascript
+{
+    status: 200,
+    data: {
+        message: String,
+        token: String
+    }
+}
+```
 
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+##### Error Response
 
-## Name
-Choose a self-explaining name for your project.
+```javascript
+{
+    status: 400 || 500,
+    data: {
+        message: String,
+    }
+}
+```
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+| Status Code | Message                                      |
+| ----------- | -------------------------------------------- |
+| 200         | Signed In Successfully                       |
+| 400         | Invalid Input                                |
+| 500         | Something went wrong, please try again later |
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+## User
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+The user related endpoints such as fetching user profile, verifying login, updating profile details or password
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+### Get Auth Status & Current User's Profile
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+This end point will be used to verify the login by verifying the JWT token and if all's well, fetch the profile of the user
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+#### Request
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+```javascript
+GET / api / user;
+{
+  headers: {
+    Authorization: `Bearer ${token}`;
+  }
+}
+```
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+#### Response
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+##### Success Response
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+```javascript
+{
+    status: 200,
+    data: {
+        message: String,
+        userData: Object
+    }
+}
+```
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+##### Error Response
 
-## License
-For open source projects, say how it is licensed.
+```javascript
+{
+    status:  402 || 404 || 500,
+    data: {
+        message: String,
+    }
+}
+```
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+| Status Code | Message                                      |
+| ----------- | -------------------------------------------- |
+| 200         | User profile fetched successfully            |
+| 402         | Unauthorized                                 |
+| 404         | No token found OR no user found              |
+| 500         | Something went wrong, please try again later |
+
+### Get All Users
+
+This endpoint will be used to get all the users except the current logged in user
+
+#### Request
+
+```javascript
+GET / api / user / all;
+{
+  headers: {
+    Authorization: `Bearer ${token}`;
+  }
+}
+```
+
+#### Response
+
+##### Success Response
+
+```javascript
+{
+    status: 200,
+    data: {
+        message: String,
+        users: Object[]
+    }
+}
+```
+
+##### Error Response
+
+```javascript
+{
+    status:  402 || 404 || 500,
+    data: {
+        message: String,
+    }
+}
+```
+
+| Status Code | Message                                      |
+| ----------- | -------------------------------------------- |
+| 200         | Users fetched successfully                   |
+| 402         | Unauthorized                                 |
+| 404         | No token found                               |
+| 500         | Something went wrong, please try again later |
+
+### Update User Profile
+
+This endpoint will be used to update the profile details of the currently logged in user
+
+#### Request
+
+```javascript
+PATCH /api/user
+{
+  headers: {
+    Authorization: `Bearer ${token}`;
+  },
+  body: {
+    name: String,
+    phoneNumber: String,
+    image: File,
+  }
+}
+```
+
+#### Response
+
+##### Success Response
+
+```javascript
+{
+    status: 200,
+    data: {
+        message: String
+    }
+}
+```
+
+##### Error Response
+
+```javascript
+{
+    status:  400 || 402 || 404 || 500,
+    data: {
+        message: String,
+    }
+}
+```
+
+| Status Code | Message                                      |
+| ----------- | -------------------------------------------- |
+| 200         | Profile updated successfully                 |
+| 400         | Invalid inputs                               |
+| 402         | Unauthorized                                 |
+| 404         | No token or user found                       |
+| 500         | Something went wrong, please try again later |
+
+### Update User Password
+
+This endpoint will be used to update the password of the currently logged in user
+
+#### Request
+
+```javascript
+PATCH /api/user/password
+{
+  headers: {
+    Authorization: `Bearer ${token}`;
+  },
+  body: {
+    oldPassword: String,
+    newPassword: String,
+    confirmNewPassword: String
+  }
+}
+```
+
+#### Response
+
+##### Success Response
+
+```javascript
+{
+    status: 200,
+    data: {
+        message: String
+    }
+}
+```
+
+##### Error Response
+
+```javascript
+{
+    status:  400 || 402 || 404 || 500,
+    data: {
+        message: String,
+    }
+}
+```
+
+| Status Code | Message                                      |
+| ----------- | -------------------------------------------- |
+| 200         | Password changed successfully                |
+| 400         | Invalid inputs                               |
+| 402         | Unauthorized                                 |
+| 404         | No token or user found                       |
+| 500         | Something went wrong, please try again later |
+
+### Get User Profile By ID
+
+This endpoint will be used to fetch the profile of user by using his ID
+
+#### Request
+
+```javascript
+GET /api/user/:userId
+{
+  headers: {
+    Authorization: `Bearer ${token}`;
+  }
+}
+```
+
+#### Response
+
+##### Success Response
+
+```javascript
+{
+    status: 200,
+    data: {
+        message: String,
+        user: Object
+    }
+}
+```
+
+##### Error Response
+
+```javascript
+{
+    status:  404 || 500,
+    data: {
+        message: String,
+    }
+}
+```
+
+| Status Code | Message                                      |
+| ----------- | -------------------------------------------- |
+| 200         | Profile fetched successfully                 |
+| 404         | No token or user found                       |
+| 500         | Something went wrong, please try again later |
+
+## Chats
+
+The chat related endpoints such as creating or removing a chat, renaming group chats or adding new members. Pinning chats or unpinning them, etc.
+
+### Create A New Chat
+
+This end point will be used to create a new chat
+
+#### Request
+
+```javascript
+POST /api/chat/
+{
+  headers: {
+    Authorization: `Bearer ${token}`;
+  },
+  data: {
+    users: String[],
+    isGroupChat: Boolean,
+    groupChatName: String,
+  }
+}
+```
+
+#### Response
+
+##### Success Response
+
+```javascript
+{
+    status: 201,
+    data: {
+        message: String,
+        chat: Object
+    }
+}
+```
+
+##### Error Response
+
+```javascript
+{
+    status:  400 || 402 || 404 || 500,
+    data: {
+        message: String,
+    }
+}
+```
+
+| Status Code | Message                                      |
+| ----------- | -------------------------------------------- |
+| 201         | Chat created successfully                    |
+| 400         | Invalid Chat Name                            |
+| 402         | Unauthorized                                 |
+| 404         | No token found OR no user found              |
+| 500         | Something went wrong, please try again later |
+
+### Rename A Group Chat
+
+This end point will be used to rename a group chat
+
+#### Request
+
+```javascript
+PATCH /api/chat/rename/:chatId
+{
+  headers: {
+    Authorization: `Bearer ${token}`;
+  },
+  data: {
+    groupChatName: String,
+  }
+}
+```
+
+#### Response
+
+##### Success Response
+
+```javascript
+{
+    status: 200,
+    data: {
+        message: String,
+        chat: Object
+    }
+}
+```
+
+##### Error Response
+
+```javascript
+{
+    status:  400 || 402 || 404 || 500,
+    data: {
+        message: String,
+    }
+}
+```
+
+| Status Code | Message                                      |
+| ----------- | -------------------------------------------- |
+| 200         | Chat renamed successfully                    |
+| 400         | Invalid Chat Name                            |
+| 402         | Unauthorized                                 |
+| 404         | No token found OR no chat found              |
+| 500         | Something went wrong, please try again later |
+
+### Add User To A Group Chat
+
+This end point will be used to add user to a group chat
+
+#### Request
+
+```javascript
+PATCH /api/chat/add/:chatId
+{
+  headers: {
+    Authorization: `Bearer ${token}`;
+  },
+  data: {
+    user: String
+  }
+}
+```
+
+#### Response
+
+##### Success Response
+
+```javascript
+{
+    status: 200,
+    data: {
+        message: String,
+        chat: Object
+    }
+}
+```
+
+##### Error Response
+
+```javascript
+{
+    status:  402 || 404 || 500,
+    data: {
+        message: String,
+    }
+}
+```
+
+| Status Code | Message                                      |
+| ----------- | -------------------------------------------- |
+| 200         | User added successfully                      |
+| 402         | Unauthorized                                 |
+| 404         | No token found OR no chat found              |
+| 500         | Something went wrong, please try again later |
+
+### Remove User From A Group Chat
+
+This end point will be used to remove user from a group chat
+
+#### Request
+
+```javascript
+PATCH /api/chat/remove/:chatId
+{
+  headers: {
+    Authorization: `Bearer ${token}`;
+  },
+  data: {
+    user: String
+  }
+}
+```
+
+#### Response
+
+##### Success Response
+
+```javascript
+{
+    status: 200,
+    data: {
+        message: String,
+        chat: Object
+    }
+}
+```
+
+##### Error Response
+
+```javascript
+{
+    status:  402 || 404 || 500,
+    data: {
+        message: String,
+    }
+}
+```
+
+| Status Code | Message                                      |
+| ----------- | -------------------------------------------- |
+| 200         | User removed successfully                    |
+| 402         | Unauthorized                                 |
+| 404         | No token found OR no chat found              |
+| 500         | Something went wrong, please try again later |
+
+### Delete A Chat
+
+This end point will be used to remove a chat
+
+#### Request
+
+```javascript
+DELETE /api/chat/:chatId
+{
+  headers: {
+    Authorization: `Bearer ${token}`;
+  },
+}
+```
+
+#### Response
+
+##### Success Response
+
+```javascript
+{
+    status: 200,
+    data: {
+        message: String,
+    }
+}
+```
+
+##### Error Response
+
+```javascript
+{
+    status:  402 || 404 || 500,
+    data: {
+        message: String,
+    }
+}
+```
+
+| Status Code | Message                                      |
+| ----------- | -------------------------------------------- |
+| 200         | Chat deleted successfully                    |
+| 402         | Unauthorized                                 |
+| 404         | No token found OR no chat found              |
+| 500         | Something went wrong, please try again later |
+
+### Get All Chats For A User
+
+This end point will be used to fetch all the chats of the currently logged in user
+
+#### Request
+
+```javascript
+GET /api/chat/
+{
+  headers: {
+    Authorization: `Bearer ${token}`;
+  },
+}
+```
+
+#### Response
+
+##### Success Response
+
+```javascript
+{
+    status: 200,
+    data: {
+        message: String,
+        chats: Object[]
+    }
+}
+```
+
+##### Error Response
+
+```javascript
+{
+    status:   402 || 404 || 500,
+    data: {
+        message: String,
+    }
+}
+```
+
+| Status Code | Message                                      |
+| ----------- | -------------------------------------------- |
+| 200         | Chats fetched successfully                   |
+| 402         | Unauthorized                                 |
+| 404         | No token found                               |
+| 500         | Something went wrong, please try again later |
+
+### Get A Specific Chat
+
+This end point will be used to fetch a specific chat
+
+#### Request
+
+```javascript
+GET /api/chat/:chatId
+{
+  headers: {
+    Authorization: `Bearer ${token}`;
+  },
+}
+```
+
+#### Response
+
+##### Success Response
+
+```javascript
+{
+    status: 200,
+    data: {
+        message: String,
+        chat: Object
+    }
+}
+```
+
+##### Error Response
+
+```javascript
+{
+    status:   402 || 404 || 500,
+    data: {
+        message: String,
+    }
+}
+```
+
+| Status Code | Message                                      |
+| ----------- | -------------------------------------------- |
+| 200         | Chats fetched successfully                   |
+| 402         | Unauthorized                                 |
+| 404         | No token found                               |
+| 500         | Something went wrong, please try again later |
+
+### Pin A Chat
+
+This end point will be used to pin a chat
+
+#### Request
+
+```javascript
+POST /api/chat/pin/:chatId
+{
+  headers: {
+    Authorization: `Bearer ${token}`;
+  },
+}
+```
+
+#### Response
+
+##### Success Response
+
+```javascript
+{
+    status: 200,
+    data: {
+        message: String
+    }
+}
+```
+
+##### Error Response
+
+```javascript
+{
+    status:   402 || 404 || 500,
+    data: {
+        message: String,
+    }
+}
+```
+
+| Status Code | Message                                      |
+| ----------- | -------------------------------------------- |
+| 200         | Chat pinned successfully                     |
+| 402         | Unauthorized                                 |
+| 404         | No token found OR no chat found              |
+| 500         | Something went wrong, please try again later |
+
+### Unpin A Chat
+
+This end point will be used to unpin a chat
+
+#### Request
+
+```javascript
+DELETE /api/chat/pin/:chatId
+{
+  headers: {
+    Authorization: `Bearer ${token}`;
+  },
+}
+```
+
+#### Response
+
+##### Success Response
+
+```javascript
+{
+    status: 200,
+    data: {
+        message: String
+    }
+}
+```
+
+##### Error Response
+
+```javascript
+{
+    status:   402 || 404 || 500,
+    data: {
+        message: String,
+    }
+}
+```
+
+| Status Code | Message                                      |
+| ----------- | -------------------------------------------- |
+| 200         | Chat unpinned successfully                   |
+| 402         | Unauthorized                                 |
+| 404         | No token found OR no chat found              |
+| 500         | Something went wrong, please try again later |
+
+## Messages
+
+The endpoints to create edit or remove messages from a chat
+
+### Create a new message transaction
+
+This end point will be used to create a new message transaction for a chat
+
+#### Request
+
+```javascript
+POST /api/message/
+{
+  headers: {
+    Authorization: `Bearer ${token}`;
+  },
+  data: {
+    message: String,
+    chatId: String,
+    transactionType: String,
+    messageId: String (OPTIONAL)
+  }
+}
+```
+
+#### Response
+
+##### Success Response
+
+```javascript
+{
+    status: 201,
+    data: {
+        message: String
+    }
+}
+```
+
+##### Error Response
+
+```javascript
+{
+    status:   400 || 402 || 404 || 500,
+    data: {
+        message: String,
+    }
+}
+```
+
+| Status Code | Message                                        |
+| ----------- | ---------------------------------------------- |
+| 201         | Transaction created successfully               |
+| 400         | Invalid message OR chat ID or transaction type |
+| 402         | Unauthorized                                   |
+| 404         | No token found OR no chat found                |
+| 500         | Something went wrong, please try again later   |
+
+### Check for new message transactions
+
+This end point will be used to check if newer transactions have been made for a chat after a given transaction
+
+#### Request
+
+```javascript
+GET /api/message/transaction/:chatId/:transactionId
+{
+  headers: {
+    Authorization: `Bearer ${token}`;
+  },
+}
+```
+
+#### Response
+
+##### Success Response
+
+```javascript
+{
+    status: 200,
+    data: {
+        message: String,
+        unfetchedTransactions: Boolean
+    }
+}
+```
+
+##### Error Response
+
+```javascript
+{
+    status:   402 || 404 || 500,
+    data: {
+        message: String,
+    }
+}
+```
+
+| Status Code | Message                                                 |
+| ----------- | ------------------------------------------------------- |
+| 200         | Transaction status fetched successfully                 |
+| 402         | Unauthorized                                            |
+| 404         | No token found OR no chat found OR No transaction found |
+| 500         | Something went wrong, please try again later            |
+
+### Get all messages for a chat
+
+This end point will be used to fetch all messages for a chat
+
+#### Request
+
+```javascript
+GET /api/message/:chatId
+{
+  headers: {
+    Authorization: `Bearer ${token}`;
+  },
+}
+```
+
+#### Response
+
+##### Success Response
+
+```javascript
+{
+    status: 200,
+    data: {
+        message: String,
+        messages: Object[]
+    }
+}
+```
+
+##### Error Response
+
+```javascript
+{
+    status:   402 || 404 || 500,
+    data: {
+        message: String,
+    }
+}
+```
+
+| Status Code | Message                                      |
+| ----------- | -------------------------------------------- |
+| 200         | Messaged fetched successfully                |
+| 402         | Unauthorized                                 |
+| 404         | No token found OR no chat found              |
+| 500         | Something went wrong, please try again later |
+
+### Get all transactions for a chat after a transaction
+
+This end point will be used to fetch all transactions for a chat after a certain transaction
+
+#### Request
+
+```javascript
+GET /api/message/:chatId/:transactionId
+{
+  headers: {
+    Authorization: `Bearer ${token}`;
+  },
+}
+```
+
+#### Response
+
+##### Success Response
+
+```javascript
+{
+    status: 200,
+    data: {
+        message: String,
+        transactions: Object[]
+    }
+}
+```
+
+##### Error Response
+
+```javascript
+{
+    status:   402 || 404 || 500,
+    data: {
+        message: String,
+    }
+}
+```
+
+| Status Code | Message                                      |
+| ----------- | -------------------------------------------- |
+| 200         | Transactions fetched successfully            |
+| 402         | Unauthorized                                 |
+| 404         | No token found OR no chat found              |
+| 500         | Something went wrong, please try again later |
