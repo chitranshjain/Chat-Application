@@ -20,7 +20,7 @@ function Signin() {
       password: password,
     };
     const data = await makePostAPICall(
-      "http://localhost:8000/api/auth/login",
+      "https://chatapp-backend-a6v2.onrender.com/api/auth/login",
       {},
       payload
     );

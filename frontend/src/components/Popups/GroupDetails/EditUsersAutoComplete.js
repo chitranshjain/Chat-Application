@@ -34,7 +34,7 @@ export default function EditUsersAutoComplete({
       return;
     }
 
-    const url = `http://localhost:8000/api/chat/add/${chat._id}`;
+    const url = `https://chatapp-backend-a6v2.onrender.com/api/chat/add/${chat._id}`;
     const header = {
       Authorization: `Bearer ${token}`,
     };

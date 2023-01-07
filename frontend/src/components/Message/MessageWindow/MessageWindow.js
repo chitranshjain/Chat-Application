@@ -21,7 +21,7 @@ function MessageWindow({ socket }) {
     setMessages();
     const token = reactLocalStorage.get("chatAppAuthToken");
     const data = await makeGetAPICall(
-      `http://localhost:8000/api/chat/${selectedChat}`,
+      `https://chatapp-backend-a6v2.onrender.com/api/chat/${selectedChat}`,
       { Authorization: `Bearer ${token}` }
     );
     setChat(data.chat);
@@ -31,7 +31,7 @@ function MessageWindow({ socket }) {
   const getChatMessages = useCallback(async () => {
     const token = reactLocalStorage.get("chatAppAuthToken");
     const data = await makeGetAPICall(
-      `http://localhost:8000/api/message/${selectedChat}`,
+      `https://chatapp-backend-a6v2.onrender.com/api/message/${selectedChat}`,
       { Authorization: `Bearer ${token}` }
     );
     setLastTransaction(data.messages[data.messages.length - 1]);
@@ -44,7 +44,7 @@ function MessageWindow({ socket }) {
     const token = reactLocalStorage.get("chatAppAuthToken");
     if (!lastTransaction) return;
     const data = await makeGetAPICall(
-      `http://localhost:8000/api/message/${selectedChat}/${lastTransaction._id}`,
+      `https://chatapp-backend-a6v2.onrender.com/api/message/${selectedChat}/${lastTransaction._id}`,
       { Authorization: `Bearer ${token}` }
     );
 
@@ -96,7 +96,7 @@ function MessageWindow({ socket }) {
     event.preventDefault();
     const token = reactLocalStorage.get("chatAppAuthToken");
     const data = await makePostAPICall(
-      "http://localhost:8000/api/message/",
+      "https://chatapp-backend-a6v2.onrender.com/api/message/",
       {
         Authorization: `Bearer ${token}`,
       },
@@ -115,7 +115,7 @@ function MessageWindow({ socket }) {
   const editMessage = async (messageId, newContent) => {
     const token = reactLocalStorage.get("chatAppAuthToken");
     const data = await makePostAPICall(
-      "http://localhost:8000/api/message/",
+      "https://chatapp-backend-a6v2.onrender.com/api/message/",
       {
         Authorization: `Bearer ${token}`,
       },
@@ -134,7 +134,7 @@ function MessageWindow({ socket }) {
   const deleteMessage = async (messageId) => {
     const token = reactLocalStorage.get("chatAppAuthToken");
     const data = await makePostAPICall(
-      "http://localhost:8000/api/message/",
+      "https://chatapp-backend-a6v2.onrender.com/api/message/",
       {
         Authorization: `Bearer ${token}`,
       },

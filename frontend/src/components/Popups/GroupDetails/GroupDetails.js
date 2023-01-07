@@ -32,7 +32,7 @@ export default function GroupDetails({ chat, getChatDetails }) {
     let token = reactLocalStorage.get("chatAppAuthToken");
     if (!token) return;
 
-    const url = `http://localhost:8000/api/chat/remove/${chat._id}`;
+    const url = `https://chatapp-backend-a6v2.onrender.com/api/chat/remove/${chat._id}`;
     const header = {
       Authorization: `Bearer ${token}`,
     };

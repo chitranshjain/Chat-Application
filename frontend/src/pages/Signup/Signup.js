@@ -26,7 +26,7 @@ function Signup() {
     payload.append("password", password);
     payload.append("confirmPassword", confirmPassword);
     const data = await makePostAPICall(
-      "http://localhost:8000/api/auth/register/",
+      "https://chatapp-backend-a6v2.onrender.com/api/auth/register/",
       {},
       payload
     );

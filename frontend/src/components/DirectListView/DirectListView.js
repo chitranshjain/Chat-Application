@@ -14,7 +14,7 @@ function DirectListView({ chats }) {
   const pinChat = async (chatId) => {
     const token = reactLocalStorage.get("chatAppAuthToken");
     await makePostAPICall(
-      `http://localhost:8000/api/chat/pin/${chatId}`,
+      `https://chatapp-backend-a6v2.onrender.com/api/chat/pin/${chatId}`,
       { Authorization: `Bearer ${token}` },
       {}
     );
@@ -25,7 +25,7 @@ function DirectListView({ chats }) {
   const deleteChat = async (chatId) => {
     const token = reactLocalStorage.get("chatAppAuthToken");
     await makeDeleteAPICall(
-      `http://localhost:8000/api/chat/${chatId}`,
+      `https://chatapp-backend-a6v2.onrender.com/api/chat/${chatId}`,
       { Authorization: `Bearer ${token}` },
       {}
     );

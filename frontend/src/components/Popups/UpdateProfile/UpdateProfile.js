@@ -31,7 +31,7 @@ export default function UpdateProfile() {
     }
 
     await makePatchAPICall(
-      "http://localhost:8000/api/user/",
+      "https://chatapp-backend-a6v2.onrender.com/api/user/",
       { Authorization: `Bearer ${token}` },
       payload
     );
